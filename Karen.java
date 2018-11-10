@@ -10,13 +10,16 @@ import java.util.List;
 
 public class Karen
 {
-    private Integer age;
+    private static final List<String> FREE_TIME = Arrays.asList("Travel", "Dance", "Eat Hot Pot", "Paint", "Run", "Climb");
+    private static final int GRADUATION_YEAR = 2014;
+    private static final int BIRTH_YEAR = 1992;
+
+    private int age;
     private String currentCity;
     private String job;
     private String company;
-    private static List<String> freeTime = Arrays.asList("Travel", "Dance", "Eat Hot Pot", "Paint", "Run", "Climb");
 
-    private Karen(Integer age, String currentCity, String job, String company)
+    private Karen(int age, String currentCity, String job, String company)
     {
         this.age = age;
         this.currentCity = currentCity;
@@ -24,40 +27,40 @@ public class Karen
         this.company = company;
     }
 
-    private static void yearInTheLifeOf(Karen k, String hobby)
-    {
-        System.out.println(StringUtils.join(Arrays.asList(
-                k.age.toString(), k.currentCity, k.job + " @ " + k.company, hobby), " | "));
-    }
-
     public static void main(String[] args)
     {
-        Karen karen = new Karen(20, "Cambridge, MA", "Student", "Harvard");
+        Karen karen = new Karen(21, "Cambridge, MA", "Student", "Harvard");
 
-        yearInTheLifeOf(karen, freeTime.get(0));
+        yearInTheLifeOf(karen, FREE_TIME.get(0));
 
-        for (int year = 1; year < 2; year++)
+        for (int year = 2014; year < 2015; year++)
         {
-            karen.age++;
+            karen.age = year - BIRTH_YEAR;
             karen.currentCity = "New York, NY";
             karen.job = "Consultant";
             karen.company = "PwC";
 
-            yearInTheLifeOf(karen, freeTime.get(year));
+            yearInTheLifeOf(karen, FREE_TIME.get(year - GRADUATION_YEAR + 1));
         }
 
-        for (int year = 2; year <= 5; year++)
+        for (int year = 2015; year < 2019; year++)
         {
-            karen.age++;
+            karen.age = year - BIRTH_YEAR;
             karen.job = "Engineer";
             karen.company = "Mark43";
 
-            if (year = 4)
+            if (year >= 2018)
             {
                 karen.job = "Engineering Manager";
             }
 
-            yearInTheLifeOf(karen, freeTime.get(year));
+            yearInTheLifeOf(karen, FREE_TIME.get(year - GRADUATION_YEAR + 1));
         }
+    }
+
+    private static void yearInTheLifeOf(Karen k, String hobby)
+    {
+        System.out.println(StringUtils.join(Arrays.asList(
+                Integer.toString(k.age), k.currentCity, k.job + " @ " + k.company, hobby), " | "));
     }
 }
